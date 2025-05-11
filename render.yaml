@@ -1,5 +1,5 @@
 services:
-  - type: web
+  - type: worker
     name: chimera-x
     env: python
     plan: free
