@@ -3,8 +3,8 @@ import json
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
-# 🔐 TUA CHAVE DE OPENROUTER
-OPENROUTER_API_KEY = "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"
+# 🔐 CHAVE NOVA DO OPENROUTER
+OPENROUTER_API_KEY = "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"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("👁️‍🗨️ CHIMERA-X v2.0 ativado. Inteligência tática online. Envie sua dúvida.")
@@ -18,7 +18,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     }
 
     payload = {
-        "model": "anthropic/claude-3-opus",  # 👑 MODELO PREMIUM
+        "model": "anthropic/claude-3-opus",  # MODELO PREMIUM
         "messages": [
             {
                 "role": "system",
@@ -46,16 +46,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ai_reply = response_data["choices"][0]["message"]["content"]
                 await update.message.reply_text(ai_reply)
             else:
-                # RESPOSTA RUIM: Mostra erro real vindo da API
                 await update.message.reply_text(
                     "⚠️ A IA travou a mente. Detalhes:\n" + json.dumps(response_data, indent=2)
                 )
 
     except Exception as e:
-        # ERRO CRÍTICO: API quebrada, timeout, etc.
         await update.message.reply_text(f"💥 Falha brutal: {e}")
 
-# 🛰️ INICIALIZAÇÃO DO BOT
+# Inicia o bot do Telegram
 app = ApplicationBuilder().token("8096221692:AAEPyrXGGptTQVCezB0Yrgrv6iHDRTwvp74").build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
