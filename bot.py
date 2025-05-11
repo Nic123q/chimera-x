@@ -4,6 +4,8 @@ import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
+print("🔍 DEBUG - OPENROUTER_API_KEY:", os.environ.get("OPENROUTER_API_KEY"))
+
 # ✅ BUSCA AS VARIÁVEIS DE AMBIENTE CORRETAS
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
